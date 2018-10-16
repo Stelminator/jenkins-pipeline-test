@@ -20,5 +20,16 @@ pipeline {
         echo 'foo'
       }
     }
+    stage('') {
+      agent {
+        docker {
+          image 'centos:7'
+        }
+
+      }
+      steps {
+        sh 'echo foo'
+      }
+    }
   }
 }
