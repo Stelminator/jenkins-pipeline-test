@@ -20,7 +20,7 @@ pipeline {
         echo 'foo'
       }
     }
-    stage('') {
+    stage('error') {
       agent {
         docker {
           image 'centos:7'
@@ -29,6 +29,11 @@ pipeline {
       }
       steps {
         sh 'echo foo'
+      }
+    }
+    stage('wat') {
+      steps {
+        milestone(ordinal: 1, label: 'ohai')
       }
     }
   }
