@@ -21,14 +21,23 @@ pipeline {
       }
     }
     stage('error') {
-      agent {
-        docker {
-          image 'centos:7'
-        }
+      parallel {
+        stage('error') {
+          agent {
+            docker {
+              image 'centos:7'
+            }
 
-      }
-      steps {
-        sh 'echo foo'
+          }
+          steps {
+            sh 'echo foo'
+          }
+        }
+        stage('watwat') {
+          steps {
+            build(propagate: true, quietPeriod: 4, wait: true, job: 'wat')
+          }
+        }
       }
     }
     stage('wat') {
